@@ -1,0 +1,7 @@
+{
+  "name": "FaBricator",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
