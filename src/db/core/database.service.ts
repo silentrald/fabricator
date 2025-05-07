@@ -7,7 +7,6 @@ import {
   SQLiteDBConnection,
 } from "@capacitor-community/sqlite";
 
-import logger from "@/modules/logger";
 import createDatabaseTableStatements from "@/db/tables";
 import createDatabaseVersions from "@/db/versions";
 import DatabaseClientImpl from "./database.client";

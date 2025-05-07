@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 type Legality = "L" // legal
   | "V" // living legends
   | "S" // suspended

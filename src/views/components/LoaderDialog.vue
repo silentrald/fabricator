@@ -4,7 +4,7 @@ import {
   IonSpinner,
 } from "@ionic/vue";
 
-import { defineExpose, defineProps, ref } from "vue";
+import { ref } from "vue";
 
 const { total, current } = defineProps<{
   current?: number;

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 const { iconPosition, icon, value } = defineProps<{
   iconPosition?: "left" | "right";
   icon?: string;

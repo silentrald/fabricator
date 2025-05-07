@@ -6,18 +6,9 @@ import FilledStarIcon from "@/views/icons/fill/StarIcon.vue";
 import { CardModel } from "@/models/card.model";
 import { computed } from "vue";
 
-import useGlobal from "@/composables/global";
-import useImage from "@/composables/image";
-
 const { card } = defineProps<{
   card: CardModel;
 }>();
-
-const {
-  $repos: { card: cardRepo },
-  $services: { filesystem: filesystemService },
-} = useGlobal();
-const image = useImage({ filesystemService });
 
 const pitchColor = computed(() => {
   // Unknown

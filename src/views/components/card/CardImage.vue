@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IonImg } from "@ionic/vue";
 
-import { defineProps, onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 
 import useGlobal from "@/composables/global";
 import useImage from "@/composables/image";
