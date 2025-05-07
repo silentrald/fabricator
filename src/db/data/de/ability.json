@@ -1,0 +1,38 @@
+[
+    {
+        "unique_id": "HCCWPfFrNzCwPDntPw6gH",
+        "name": "Aktion"
+    },
+    {
+        "unique_id": "kQNwpnQqhC8RGPcpDKdJD",
+        "name": "Angriffsreaktion"
+    },
+    {
+        "unique_id": "GJdGNktHCbbzmHNkkNfDz",
+        "name": "Spontan"
+    },
+    {
+        "unique_id": "7jJ7hBjrMQd6fcWcqTb6D",
+        "name": "Einmal pro Zug Aktion"
+    },
+    {
+        "unique_id": "9DbtWdGfndKG7CCDPmb9t",
+        "name": "Einmal pro Zug Angriffsreaktion"
+    },
+    {
+        "unique_id": "KzGJdT7tz9LfLhWfbnFwb",
+        "name": "Einmal pro Zug Verteidigungsreaktion"
+    },
+    {
+        "unique_id": "7mcpJ8zrDHJWkf9r68bhH",
+        "name": "Einmal pro Zug"
+    },
+    {
+        "unique_id": "t7KdJFMrpcTDBBnGWf6wK",
+        "name": "Einmal pro Zug Spontan"
+    },
+    {
+        "unique_id": "cTkzhh6mR7NHCWnBRnbWW",
+        "name": "Zweimal pro Zug Spontan"
+    }
+]

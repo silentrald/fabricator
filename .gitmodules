@@ -1,0 +1,3 @@
+[submodule "external/cards"]
+	path = external/cards
+	url = https://github.com/the-fab-cube/flesh-and-blood-cards.git
