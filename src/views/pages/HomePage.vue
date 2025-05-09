@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import {
   IonPage,
+  IonHeader,
   IonContent,
   IonFooter,
+  IonSelect,
+  IonSelectOption,
 } from "@ionic/vue";
 import LoaderDialog from "@/views/components/LoaderDialog.vue";
 
@@ -16,6 +19,7 @@ import { onMounted, ref } from "vue";
 import system from "@/modules/system";
 
 import { useRouter } from "vue-router";
+import useLocale from "@/composables/locale";
 import useGlobal from "@/composables/global";
 import useInitializer from "@/composables/initializer";
 
@@ -24,20 +28,23 @@ const {
   $services: { store: storeService },
 } = useGlobal();
 const router = useRouter();
+const {
+  t, setLocale,
+  availableLocales, currentLocale,
+} = useLocale();
 
 const loader = ref();
 const loaderCurrent = ref<number>(0);
 const loaderTotal = ref<number>(0);
 const loaderText = ref<string>("");
 
-// TODO: Add translations
 const buttons = [
-  { id: "search", icon: MagnifyingGlassIcon, text: "Search" },
-  { id: "life", icon: HeartIcon, text: "Life" },
+  { id: "search", icon: MagnifyingGlassIcon },
+  { id: "life", icon: HeartIcon },
   // TODO: Remove hide property once everything is implemented
-  { id: "collection", icon: BoxOpenIcon, text: "Collection", hide: true },
-  { id: "deck", icon: CardsBlankIcon, text: "Deck", hide: true },
-  { id: "rulings", icon: BookIcon, text: "Rulings", hide: true },
+  { id: "collection", icon: BoxOpenIcon, hide: true },
+  { id: "deck", icon: CardsBlankIcon, hide: true },
+  { id: "rulings", icon: BookIcon, hide: true },
 ];
 
 const initializer = useInitializer({
@@ -74,6 +81,23 @@ onMounted(async () => {
 
 <template>
 <ion-page>
+  <ion-header>
+    <ion-select
+      interface="popover"
+      justify="end"
+      :value="currentLocale()"
+      @ionChange="event => setLocale(event.detail.value)"
+    >
+      <ion-select-option
+        v-for="l in availableLocales()"
+        :key="l.locale"
+        :value="l.locale"
+      >
+        {{ l.text }}
+      </ion-select-option>
+    </ion-select>
+  </ion-header>
+
   <ion-content :fullscreen="true">
     <loader-dialog ref="loader"
       :current="loaderCurrent"
@@ -91,12 +115,11 @@ onMounted(async () => {
           <button class="nav-button" @click="router.push(button.id)">
             <component :is="button.icon" class="nav-icon" />
           </button>
-          <div class="nav-text">{{ button.text }}</div>
+          <div class="nav-text">{{ t(`home.${button.id}`) }}</div>
         </div>
       </template>
     </div>
 
-    <div/>
   </ion-content>
 
   <ion-footer>

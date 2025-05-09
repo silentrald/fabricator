@@ -20,11 +20,13 @@ import CardTextItem from "@/views/components/card/CardTextItem.vue";
 import logger from "@/modules/logger";
 import { ref } from "vue";
 import useGlobal from "@/composables/global";
+import useLocale from "@/composables/locale";
 
 import { CardModel } from "@/models/card.model";
 import { Toast } from "@capacitor/toast";
 
 const { card: cardRepo } = useGlobal().$repos;
+const { t } = useLocale();
 
 const page = ref<number>(1);
 const more = ref<boolean>(true);
@@ -124,7 +126,7 @@ onIonViewWillEnter(async () => {
     <ion-footer>
       <ion-toolbar>
         <ion-searchbar
-          placeholder="Search..."
+          :placeholder="t('search.placeholder')"
           :debounce="1000"
           @ionInput="onSearchChanged"
           @ionChange="onSearchChanged"

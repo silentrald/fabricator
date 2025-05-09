@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "@ionic/vue-router";
 import { RouteRecordRaw } from "vue-router";
 
-import HomePage from "../views/pages/HomePage.vue";
+import HomePage from "./views/pages/HomePage.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -12,17 +12,17 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/life",
     name: "Life",
-    component: () => import("../views/pages/LifePage.vue"),
+    component: () => import("./views/pages/LifePage.vue"),
   },
   {
     path: "/search",
     name: "CardSearch",
-    component: () => import("../views/pages/CardSearchPage.vue"),
+    component: () => import("./views/pages/CardSearchPage.vue"),
   },
   {
     path: "/card/:id",
     name: "Card",
-    component: () => import("../views/pages/CardPage.vue"),
+    component: () => import("./views/pages/CardPage.vue"),
   },
 ];
 

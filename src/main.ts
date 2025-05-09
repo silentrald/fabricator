@@ -23,17 +23,20 @@ import App from "./App.vue";
 import { Capacitor } from "@capacitor/core";
 import { IonicVue, isPlatform } from "@ionic/vue";
 import { Platform } from "./types";
+
+import logger from "./modules/logger";
+import locale from "./modules/locale";
+import router from "./router";
+
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
 import createStoreService from "./services/store.service";
 import createDatabaseService from "./db/core/database.service";
-import { createCardRepo } from "./repo/card";
-import { createInitializerService } from "./services/initializer.service";
-import logger from "./modules/logger";
-import router from "./router";
 import createFilesystemAppService from "./services/filesystem/app.services";
 import createFilesystemWebService from "./services/filesystem/web.services";
+import { createCardRepo } from "./repo/card";
+import { createInitializerService } from "./services/initializer.service";
 
 const platform = Capacitor.getPlatform() as Platform;
 
@@ -73,10 +76,14 @@ window.addEventListener("DOMContentLoaded", async () => {
   const storeService = await createStoreService();
 
   const pinia = createPinia();
+
   const app = createApp(App)
     .use(pinia)
     .use(IonicVue)
     .use(router);
+
+  // TODO: Set in storage for the default localization
+  await locale.init(app, "en");
 
   // === Repositories === //
 
