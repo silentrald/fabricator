@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { IonImg } from "@ionic/vue";
 
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 import useGlobal from "@/composables/global";
 import useImage from "@/composables/image";
@@ -11,7 +11,7 @@ const {
 } = useGlobal();
 const image = useImage({ filesystemService });
 
-const { src, alt, favorite } = defineProps<{
+const props = defineProps<{
   src?: string;
   alt?: string;
   favorite?: boolean;
@@ -19,16 +19,29 @@ const { src, alt, favorite } = defineProps<{
 
 const _src = ref("");
 
-onMounted(async () => {
-  const result = favorite
-    ? await image.getDataUrl(src)
-    : await image.getCacheUrl(src);
+async function onSourceChange(newSrc: string | undefined) {
+  _src.value = "";
+  if (!newSrc) {
+    return;
+  }
+
+  const result = props.favorite
+    ? await image.getDataUrl(newSrc)
+    : await image.getCacheUrl(newSrc);
   if (result.hasError()) {
     // TODO: Some toast here
     return;
   }
 
   _src.value = result.getValue();
+}
+
+onMounted(() => {
+  onSourceChange(props.src);
+});
+
+watch(() => props.src, (newSrc) => {
+  onSourceChange(newSrc);
 });
 </script>
 
@@ -36,7 +49,7 @@ onMounted(async () => {
 <div class="card-image">
   <ion-img v-if="_src" :src="_src" />
   <div v-else>
-    <div class="card-alt">{{ alt }}</div>
+    <div class="card-alt">{{ props.alt }}</div>
     <ion-img src="/assets/img/card-template.png" />
   </div>
 </div>

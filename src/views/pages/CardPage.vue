@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { CardModel } from "@/models/card.model";
+
 import {
   IonBackButton,
   IonButtons,
@@ -34,7 +36,7 @@ const image = useImage({ filesystemService });
 const card = ref<CardModel | null>(null);
 
 onMounted(async () => {
-  const { id } = route.params;
+  const id = route.params.id.toString();
   const cardResult = await cardRepo.getCard(id);
   if (cardResult.hasError()) {
     logger.error("Card page error", cardResult.getError());
@@ -73,7 +75,7 @@ const cardTopLeft = computed(() => {
     return null;
   }
 
-  const value: number | null = card.value.pitch;
+  const value: number | null | undefined = card.value.pitch;
   if (typeof value === "number") {
     return {
       icon: `p${value}`,
@@ -89,7 +91,7 @@ const cardTopRight = computed(() => {
     return null;
   }
 
-  const value: number | null = card.value.cost;
+  const value: number | null | undefined = card.value.cost;
   if (typeof value === "number") {
     return {
       icon: "cost",
@@ -105,7 +107,7 @@ const cardBottomLeft = computed(() => {
     return null;
   }
 
-  let value: number | null = card.value.power;
+  let value: number | null | undefined = card.value.power;
   if (typeof value === "number") {
     return {
       icon: "pwr",
@@ -129,7 +131,7 @@ const cardBottomRight = computed(() => {
     return null;
   }
 
-  let value: number | null = card.value.defense;
+  let value: number | null | undefined = card.value.defense;
   if (typeof value === "number") {
     return {
       icon: "def",
@@ -158,6 +160,10 @@ function onCardImageClicked() {
 }
 
 async function onFavoriteClicked() {
+  if (!card.value) {
+    return;
+  }
+
   const id = card.value.id;
   const newFavorite = !card.value.favorite;
 

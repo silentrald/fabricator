@@ -6,6 +6,7 @@ import {
   IonFooter,
   IonSelect,
   IonSelectOption,
+  SelectCustomEvent,
 } from "@ionic/vue";
 import LoaderDialog from "@/views/components/LoaderDialog.vue";
 
@@ -63,7 +64,7 @@ const initializer = useInitializer({
   updateDialog(updates: {
     current: number;
     total: number;
-    text: text;
+    text: string;
   }) {
     loaderCurrent.value = updates.current;
     loaderTotal.value = updates.total;
@@ -86,7 +87,8 @@ onMounted(async () => {
       interface="popover"
       justify="end"
       :value="currentLocale()"
-      @ionChange="event => setLocale(event.detail.value)"
+      @ionChange="(event: SelectCustomEvent) =>
+        setLocale(event.detail.value)"
     >
       <ion-select-option
         v-for="l in availableLocales()"

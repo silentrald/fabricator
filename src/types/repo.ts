@@ -48,7 +48,7 @@ export interface CardRepo {
     name?: string;
     keyword?: string;
     type?: string;
-    favorite?: boolean;
+    favorite?: boolean | null;
     pagination: Pagination;
   }): Promise<Result<CardModel[]>>;
 

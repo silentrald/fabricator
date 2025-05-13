@@ -6,7 +6,7 @@ export default function useGlobal(params?: {
   app?: ComponentInternalInstance | null
 }) {
   const app = params ? params.app : getCurrentInstance();
-  return app?.appContext.config.globalProperties as {
+  return (app as any).appContext.config.globalProperties as {
     $repos: {
       card: CardRepo;
     };
@@ -14,5 +14,5 @@ export default function useGlobal(params?: {
       store: StoreService;
       filesystem: FilesystemService;
     };
-  } | undefined;
+  };
 }

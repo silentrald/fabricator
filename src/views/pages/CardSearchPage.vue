@@ -13,6 +13,7 @@ import {
   IonButtons,
   IonBackButton,
   onIonViewWillEnter,
+  SearchbarCustomEvent,
 } from "@ionic/vue";
 import HeaderLife from "@/views/components/life/HeaderLife.vue";
 import CardTextItem from "@/views/components/card/CardTextItem.vue";
@@ -72,12 +73,12 @@ async function loadMoreCards(event: InfiniteScrollCustomEvent) {
   await event.target.complete();
 }
 
-const onSearchChanged = async (event) => {
+const onSearchChanged = async (event: SearchbarCustomEvent) => {
   const newSearch = event.target.value;
   if (search.value === newSearch) {
     return;
   }
-  search.value = newSearch;
+  search.value = newSearch ?? "";
 
   more.value = true;
   page.value = 1;

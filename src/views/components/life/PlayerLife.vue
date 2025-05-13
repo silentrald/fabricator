@@ -9,7 +9,10 @@ const useHealth = () => {
   let timeout: number | null = null;
 
   function resetChange() {
-    clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
     timeout = setTimeout(() => {
       timeout = null;
       change.value = 0;
